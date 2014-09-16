@@ -29,6 +29,9 @@ Or install it yourself as:
 ###Email
 `YaleLDAP.lookup_by_email("casey.watts@yale.edu")` will return a hash with commonly needed LDAP attributes.
 
+## Documentation
+The source code is documented on rdoc.info
+<http://rdoc.info/github/YaleSTC/yaleldap/master/frames>
 
 ## Contributing
 
