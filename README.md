@@ -4,7 +4,7 @@
 
 # Yaleldap
 
-Automatically connects to the LDAP server if you are on campus/VPN. Can be queried by UPI, and it will return a simple ruby hash with the relevant information.
+Offers the most common Yale LDAP search queries. Returns a convenient ruby hash with names you can understand. The LDAP server can only be connected to from Yale's campus or on Yale's VPN.
 
 ## Installation
 
@@ -42,11 +42,9 @@ YaleLDAP.lookup_by_email("casey.watts@yale.edu")
 
 
 ## Documentation
-The source code is documented on rdoc.info
+The source code is documented thoroughly, view it on [rdoc.info](http://rdoc.info/github/YaleSTC/yaleldap/master/frames)
 
-<http://rdoc.info/github/YaleSTC/yaleldap/master/frames>
-
-For more background on how the `net-ldap` gem works, check out this [Yale-specific gist](https://gist.github.com/caseywatts/ddea3996853050d1e5ad)
+For more background on how the `net-ldap` gem works with specific Yale examples, check out this [Yale net-ldap gist](https://gist.github.com/caseywatts/ddea3996853050d1e5ad).
 
 ## Contributing
 
