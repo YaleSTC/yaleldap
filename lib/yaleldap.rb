@@ -16,11 +16,11 @@ module YaleLDAP
   LDAP_ATTRS = %w(uid givenname sn mail collegename college class UPI)
 
   ##
-  # == Parameters:
-  # UPI as a string, ex "12714662"
+  # Parameters::
+  #   UPI as a string, ex "12714662"
   #
-  # == Returns:
-  # Standard hash (see extract_attributes)
+  # Returns::
+  #   Standard hash (see extract_attributes)
   # 
   # == Example:
   # YaleLDAP.lookup_by_upi("12714662")
@@ -35,11 +35,11 @@ module YaleLDAP
   end
 
   ##
-  # == Parameters::
+  # Parameters::
   # netid as a string, ex "csw3"
   #
-  # == Returns:
-  # Standard hash (see extract_attributes)
+  # Returns::
+  #   Standard hash (see extract_attributes)
   # 
   # == Example:
   # `YaleLDAP.lookup_by_netid("csw3")`
@@ -54,12 +54,11 @@ module YaleLDAP
   end
 
   ##
-  # == Parameters:
-  # Format::
+  # Parameters::
   #   email as a string, ex "casey.watts@yale.edu"
   #
-  # == Returns:
-  # Standard hash (see extract_attributes)
+  # Returns::
+  #   Standard hash (see extract_attributes)
   # 
   # == Example:
   # YaleLDAP.lookup_by_email("casey.watts@yale.edu")
