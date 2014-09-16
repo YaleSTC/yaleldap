@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["casey.s.watts@gmail.com"]
   spec.summary       = %q{Easy connection to Yale's LDAP}
   spec.description   = %q{Automatically connects to the LDAP server if you are on campus/VPN. Can be queried by UPI, and it will return a simple ruby hash with the relevant information.}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/YaleSTC/yaleldap"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
