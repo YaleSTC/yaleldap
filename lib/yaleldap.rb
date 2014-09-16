@@ -22,8 +22,8 @@ module YaleLDAP
   # Returns::
   #   Standard hash (see extract_attributes)
   # 
-  # == Example:
-  # YaleLDAP.lookup_by_upi("12714662")
+  # Example::
+  #   YaleLDAP.lookup_by_upi("12714662")
 
   def self.lookup_by_upi(upi)
     ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
@@ -36,13 +36,13 @@ module YaleLDAP
 
   ##
   # Parameters::
-  # netid as a string, ex "csw3"
+  #   netid as a string, ex "csw3"
   #
   # Returns::
   #   Standard hash (see extract_attributes)
   # 
-  # == Example:
-  # `YaleLDAP.lookup_by_netid("csw3")`
+  # Example::
+  #  YaleLDAP.lookup_by_netid("csw3")
   #
   def self.lookup_by_netid(netid)
     ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
@@ -60,8 +60,8 @@ module YaleLDAP
   # Returns::
   #   Standard hash (see extract_attributes)
   # 
-  # == Example:
-  # YaleLDAP.lookup_by_email("casey.watts@yale.edu")
+  # Example::
+  #   YaleLDAP.lookup_by_email("casey.watts@yale.edu")
   #
   def self.lookup_by_email(email)
     ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
