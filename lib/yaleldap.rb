@@ -6,10 +6,28 @@ module YaleLDAP
   LDAP_BASE = 'ou=People,o=yale.edu'
   LDAP_ATTRS = %w(uid givenname sn mail collegename college class UPI)
 
-  # test with LDAP.lookup_by_upi("12714662")
+  # test with YaleLDAP.lookup_by_upi("12714662")
   def self.lookup_by_upi(upi)
     ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
     upifilter = Net::LDAP::Filter.eq('UPI', upi)
+    ldap_response = ldap.search(base: LDAP_BASE,
+                     filter: upifilter,
+                     attributes: LDAP_ATTRS)
+    extract_attributes(ldap_response)
+  end
+
+  def self.lookup_by_netid(netid)
+    ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
+    upifilter = Net::LDAP::Filter.eq('uid', netid)
+    ldap_response = ldap.search(base: LDAP_BASE,
+                     filter: upifilter,
+                     attributes: LDAP_ATTRS)
+    extract_attributes(ldap_response)
+  end
+
+  def self.lookup_by_email(email)
+    ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
+    upifilter = Net::LDAP::Filter.eq('mail', email)
     ldap_response = ldap.search(base: LDAP_BASE,
                      filter: upifilter,
                      attributes: LDAP_ATTRS)
