@@ -18,8 +18,14 @@ Or install it yourself as:
 
 ## Usage
 
+###UPI
 `YaleLDAP.lookup_by_upi("123456")` will return a hash with commonly needed LDAP attributes.
 
+###NetID
+`YaleLDAP.lookup_by_netid("csw3")` will return a hash with commonly needed LDAP attributes.
+
+###Email
+`YaleLDAP.lookup_by_email("casey.watts@yale.edu")` will return a hash with commonly needed LDAP attributes.
 
 
 ## Contributing

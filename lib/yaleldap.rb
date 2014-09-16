@@ -1,13 +1,30 @@
 require "yaleldap/version"
 require "net-ldap"
 
+#YaleLDAP Module is xyz
 module YaleLDAP
+  # Yale's LDAP Host
   LDAP_HOST = 'directory.yale.edu'
+
+  # Yale's LDAP Port
   LDAP_PORT = 389
+
+  # Specify to LDAP that we are searching for people
   LDAP_BASE = 'ou=People,o=yale.edu'
+
+  # The most common Yale LDAP atttributes that we care about extracting
   LDAP_ATTRS = %w(uid givenname sn mail collegename college class UPI)
 
-  # test with YaleLDAP.lookup_by_upi("12714662")
+  ##
+  # == Parameters:
+  # UPI as a string, ex "12714662"
+  #
+  # == Returns:
+  # Standard hash (see extract_attributes)
+  # 
+  # == Example:
+  # YaleLDAP.lookup_by_upi("12714662")
+
   def self.lookup_by_upi(upi)
     ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
     upifilter = Net::LDAP::Filter.eq('UPI', upi)
@@ -17,6 +34,16 @@ module YaleLDAP
     extract_attributes(ldap_response)
   end
 
+  ##
+  # == Parameters::
+  # netid as a string, ex "csw3"
+  #
+  # == Returns:
+  # Standard hash (see extract_attributes)
+  # 
+  # == Example:
+  # `YaleLDAP.lookup_by_netid("csw3")`
+  #
   def self.lookup_by_netid(netid)
     ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
     upifilter = Net::LDAP::Filter.eq('uid', netid)
@@ -26,6 +53,17 @@ module YaleLDAP
     extract_attributes(ldap_response)
   end
 
+  ##
+  # == Parameters:
+  # Format::
+  #   email as a string, ex "casey.watts@yale.edu"
+  #
+  # == Returns:
+  # Standard hash (see extract_attributes)
+  # 
+  # == Example:
+  # YaleLDAP.lookup_by_email("casey.watts@yale.edu")
+  #
   def self.lookup_by_email(email)
     ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
     upifilter = Net::LDAP::Filter.eq('mail', email)
@@ -36,6 +74,11 @@ module YaleLDAP
   end
 
 private
+  #
+  # Input a raw LDAP response
+  #
+  # Output is a hash with keys: first_name, last_name, upi, netid, email, collegename, college, class_year
+  #
   def self.extract_attributes(ldap_response)
     # everyone has these
     first_name = ldap_response[0][:givenname][0]
