@@ -23,16 +23,27 @@ Or install it yourself as:
 ## Usage
 
 ###UPI
-`YaleLDAP.lookup_by_upi("123456")` will return a hash with commonly needed LDAP attributes.
+```
+YaleLDAP.lookup_by_upi("12714662")
+=> {:first_name=>"Casey", :last_name=>"Watts", :yale_upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :collegename=>"", :college=>"", :class_year=>""}
+```
 
 ###NetID
-`YaleLDAP.lookup_by_netid("csw3")` will return a hash with commonly needed LDAP attributes.
+```
+YaleLDAP.lookup_by_netid("csw3")
+=> {:first_name=>"Casey", :last_name=>"Watts", :yale_upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :collegename=>"", :college=>"", :class_year=>""}
+```
 
 ###Email
-`YaleLDAP.lookup_by_email("casey.watts@yale.edu")` will return a hash with commonly needed LDAP attributes.
+```
+YaleLDAP.lookup_by_email("casey.watts@yale.edu")
+=> {:first_name=>"Casey", :last_name=>"Watts", :yale_upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :collegename=>"", :college=>"", :class_year=>""}
+```
+
 
 ## Documentation
 The source code is documented on rdoc.info
+
 <http://rdoc.info/github/YaleSTC/yaleldap/master/frames>
 
 ## Contributing
