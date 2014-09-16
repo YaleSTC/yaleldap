@@ -1,5 +1,5 @@
 #Version Goes Here
 module YaleLDAP
   #Version Number
-  VERSION = "0.0.1"
+  VERSION = "0.0.2"
 end

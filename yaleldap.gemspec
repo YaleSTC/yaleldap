@@ -5,7 +5,7 @@ require 'yaleldap/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "yaleldap"
-  spec.version       = Yaleldap::VERSION
+  spec.version       = YaleLDAP::VERSION
   spec.authors       = ["caseywatts"]
   spec.email         = ["casey.s.watts@gmail.com"]
   spec.summary       = %q{Easy connection to Yale's LDAP}
