@@ -16,10 +16,10 @@ module YaleLDAP
   LDAP_ATTRS = %w(uid givenname sn mail collegename college class UPI)
 
   ##
-  # Lookup LDAP information by UPI
+  # Lookup LDAP information by upi
   # 
   # @param
-  #   UPI as a string, ex "12714662"
+  #   upi as a string, ex "12714662"
   #
   # @return
   #   Standard hash (see extract_attributes)
