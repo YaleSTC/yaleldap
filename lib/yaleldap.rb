@@ -1,4 +1,5 @@
 require "yaleldap/version"
+require "net-ldap"
 
 module YaleLDAP
   LDAP_HOST = 'directory.yale.edu'
