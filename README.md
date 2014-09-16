@@ -46,6 +46,8 @@ The source code is documented on rdoc.info
 
 <http://rdoc.info/github/YaleSTC/yaleldap/master/frames>
 
+For more background on how the `net-ldap` gem works, check out this [Yale-specific gist](https://gist.github.com/caseywatts/ddea3996853050d1e5ad)
+
 ## Contributing
 
 1. Fork it ( http://github.com/YaleSTC/yaleldap/fork )
