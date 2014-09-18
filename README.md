@@ -1,5 +1,7 @@
 [![Gem Version](https://badge.fury.io/rb/yaleldap.svg)](http://badge.fury.io/rb/yaleldap)
 [![Dependency Status](https://gemnasium.com/YaleSTC/yaleldap.svg)](https://gemnasium.com/YaleSTC/yaleldap)
+[![Code Climate](https://codeclimate.com/github/YaleSTC/yaleldap/badges/gpa.svg)](https://codeclimate.com/github/YaleSTC/yaleldap)
+[![Test Coverage](https://codeclimate.com/github/YaleSTC/yaleldap/badges/coverage.svg)](https://codeclimate.com/github/YaleSTC/yaleldap)
 [![Inline docs](http://inch-ci.org/github/YaleSTC/yaleldap.png?branch=master)](http://inch-ci.org/github/YaleSTC/yaleldap)
 [![Coverage Status](https://coveralls.io/repos/YaleSTC/yaleldap/badge.png)](https://coveralls.io/r/YaleSTC/yaleldap)
 
