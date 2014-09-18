@@ -4,10 +4,10 @@ require "net-ldap"
 #YaleLDAP Module is xyz
 module YaleLDAP
   # Yale's LDAP Host
-  # LDAP_HOST = "directory.yale.edu"
+  LDAP_HOST = "directory.yale.edu"
 
   # Yale's LDAP Port
-  LDAP_HOST, LDAP_PORT = "directory.yale.edu", 389
+  LDAP_PORT = 389
 
   # Specify to LDAP that we are searching for people
   LDAP_BASE = 'ou=People,o=yale.edu'
