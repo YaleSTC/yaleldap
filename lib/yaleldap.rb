@@ -7,7 +7,7 @@ module YaleLDAP
   LDAP_HOST = 'directory.yale.edu'
 
   # Yale's LDAP Port
-  LDAP_PORT = 389
+  LDAP_PORT =389
 
   # Specify to LDAP that we are searching for people
   LDAP_BASE = 'ou=People,o=yale.edu'
