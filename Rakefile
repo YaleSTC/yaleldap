@@ -11,4 +11,5 @@ require 'bundler/gem_tasks'
 #     'bundle exec rspec spec --color --format documentation'
 # end
 
+RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
