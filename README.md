@@ -2,7 +2,7 @@
 [![Dependency Status](https://gemnasium.com/YaleSTC/yaleldap.svg)](https://gemnasium.com/YaleSTC/yaleldap)
 [![Inline docs](http://inch-ci.org/github/YaleSTC/yaleldap.png?branch=master)](http://inch-ci.org/github/YaleSTC/yaleldap)
 
-# Yaleldap
+# YaleLDAP
 
 Offers the most common Yale LDAP search queries, returning a convenient ruby hash with names you can understand. Makes it easy to conserve your Yale users' time and energy, saving them from typing again and again that basic information they *know* mother Yale already has on record.
 
