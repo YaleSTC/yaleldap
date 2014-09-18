@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
   # spec.add_development_dependency "simplecov", "~> 0.8"
   # spec.add_development_dependency "coveralls"
   spec.add_development_dependency "codeclimate-test-reporter", require: nil
-"
 
   spec.add_runtime_dependency "net-ldap"
 end
