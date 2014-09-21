@@ -1,7 +1,7 @@
 require "yaleldap/version"
 require "net-ldap"
 
-#YaleLDAP Module is xyz
+#YaleLDAP Module contains the logic for YaleLDAP
 module YaleLDAP
   # Yale's LDAP Host
   LDAP_HOST = 'directory.yale.edu'
@@ -12,23 +12,18 @@ module YaleLDAP
   # Specify to LDAP that we are searching for people
   LDAP_BASE = 'ou=People,o=yale.edu'
 
-  # The most common Yale LDAP atttributes that we care about extracting
-  # LDAP_ATTRS = %w(uid givenname sn mail collegename college class UPI)
-
   ##
   # lookup by an arbitrary query (netid, email, upi, etc)
   #
-  # @param
-  #   a hash with the format {:querytype => specificquery}
-  #   querytype accepts 'mail', 'uid', 'UPI'
+  # @param [Hash] input_hash the query we're looking up with just one key-value pair. It expects the keys 'email', 'netid', 'upi'.
   #
-  # @return
-  #   standard hash (see extract_attributes)
+  # @return [hash]
+  #   our standard return hash (see README.md for a description of what it returns)
   #
   # @example
-  #   YaleLDAP.lookup(mail: "casey.watts@yale.edu")
-  #   YaleLDAP.lookup(uid: "csw3")
-  #   YaleLDAP.lookup(UPI: "12714662")
+  #   YaleLDAP.lookup(email: "casey.watts@yale.edu")
+  #   YaleLDAP.lookup(netid: "csw3")
+  #   YaleLDAP.lookup(upi: "12714662")
   #
   def self.lookup(input_hash)
     lookup_filter = construct_filter(input_hash)
@@ -85,7 +80,7 @@ private
 
 
   # Constructs a Net::LDAP::Filter object out of our user input
-  # @params the input hash we want users to input, such as {:email => "casey.watts@yale.edu"}
+  # @param the input hash we want users to input, such as {:email => "casey.watts@yale.edu"}
   # @return a net-ldap Net::LDAP::Filter object with our desired query
   def self.construct_filter(input_hash)
     query_type_nickname = input_hash.keys.first
@@ -96,7 +91,7 @@ private
   end
 
   # Executes the query on the LDAP server.
-  # @params a net-ldap Net::LDAP::Filter object with our desired query
+  # @param a net-ldap Net::LDAP::Filter object with our desired query
   # @return the raw net-ldap LDAP response object
   def self.execute_query(lookup_filter)
     ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
