@@ -37,12 +37,12 @@ module YaleLDAP
     return attributes
   end
 
-# private
-  #
-  # Input a raw LDAP response
-  #
-  # Output is a hash with keys: first_name, last_name, upi, netid, email, collegename, college, class_year
-  #
+private
+
+  ###
+  # Nickname Logic
+  ###
+
   def self.convert_from_nickname(attribute)
     attribute = attribute.to_s
     nicknames[attribute]
@@ -77,6 +77,13 @@ module YaleLDAP
     }
   end
 
+
+
+  ###
+  #LDAP Search Logic
+  ###
+
+
   # Constructs a Net::LDAP::Filter object out of our user input
   # @params the input hash we want users to input, such as {:email => "casey.watts@yale.edu"}
   # @return a net-ldap Net::LDAP::Filter object with our desired query
@@ -99,6 +106,7 @@ module YaleLDAP
     return ldap_response
   end
 
+
   def self.extract_attributes(ldap_response)
     attributes = {}
     nicknames.each do |nickname, ldapname|
@@ -107,25 +115,6 @@ module YaleLDAP
       attributes[nickname.to_sym] = attribute
     end
     return attributes
-    # first_name = extract_attribute(ldap_response, :givenname)
-    # last_name = extract_attribute(ldap_response, :sn)
-    # upi = extract_attribute(ldap_response, :UPI)
-    # netid = extract_attribute(ldap_response, :uid)
-    # email = extract_attribute(ldap_response, :mail)
-    # collegename = extract_attribute(ldap_response, :collegename)
-    # college = extract_attribute(ldap_response, :college)
-    # class_year = extract_attribute(ldap_response, :class)
-
-    # return {
-    #   first_name: first_name,
-    #   last_name: last_name,
-    #   yale_upi: upi,
-    #   netid: netid,
-    #   email: email,
-    #   collegename: collegename,
-    #   college: college,
-    #   class_year: class_year
-    # }
   end
 
   def self.extract_attribute(ldap_response, attribute_name)
