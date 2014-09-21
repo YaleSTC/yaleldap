@@ -5,7 +5,3 @@ script: bundle exec rspec spec
 addons:
   code_climate:
     repo_token: 26473d8ac983f8c195675b3369530ea84d26ee1d1101dd0300caa29f7642eb41 bundle exec rake
-
-
-# uncomment this line if your project needs to run something other than `rake`:
-# script: bundle exec rspec spec

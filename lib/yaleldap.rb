@@ -4,7 +4,7 @@ require "net-ldap"
 #YaleLDAP Module is xyz
 module YaleLDAP
   # Yale's LDAP Host
-  LDAP_HOST = "directory.yale.edu"
+  LDAP_HOST = 'directory.yale.edu'
 
   # Yale's LDAP Port
   LDAP_PORT = 389
