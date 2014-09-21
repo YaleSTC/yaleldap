@@ -1,10 +1,13 @@
 require 'spec_helper'
 
 describe YaleLDAP do
-  it 'does stuff' do
+  it 'can look up by NetID' do
     true.should be_truthy
   end
-  xit 'does stuffz' do
-    raise "trouble"
+  xit 'can look up by Email' do
+    raise "email trouble"
+  end
+  xit 'can look up by UPI' do
+    raise "upi trouble"
   end
 end
