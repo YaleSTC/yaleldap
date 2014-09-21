@@ -1,7 +1,7 @@
 require "yaleldap/version"
 require "net-ldap"
 
-#YaleLDAP Module is xyz
+#YaleLDAP Module contains the logic for YaleLDAP
 module YaleLDAP
   # Yale's LDAP Host
   LDAP_HOST = 'directory.yale.edu'
@@ -12,101 +12,109 @@ module YaleLDAP
   # Specify to LDAP that we are searching for people
   LDAP_BASE = 'ou=People,o=yale.edu'
 
-  # The most common Yale LDAP atttributes that we care about extracting
-  LDAP_ATTRS = %w(uid givenname sn mail collegename college class UPI)
-
   ##
-  # Lookup LDAP information by upi
-  # 
-  # @param
-  #   upi as a string, ex "12714662"
+  # lookup by an arbitrary query (netid, email, upi, etc)
   #
-  # @return
-  #   Standard hash (see extract_attributes)
-  # 
+  # @param [Hash] input_hash the query we're looking up with just one key-value pair. It expects the keys 'email', 'netid', 'upi'.
+  #
+  # @return [hash]
+  #   our standard return hash (see README.md for a description of what it returns)
+  #
   # @example
-  #   YaleLDAP.lookup_by_upi("12714662")
-
-  def self.lookup_by_upi(upi)
-    ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
-    upifilter = Net::LDAP::Filter.eq('UPI', upi)
-    ldap_response = ldap.search(base: LDAP_BASE,
-                     filter: upifilter,
-                     attributes: LDAP_ATTRS)
-    extract_attributes(ldap_response)
-  end
-
-  ##
-  # Lookup LDAP information by netid
-  # 
-  # @param
-  #   netid as a string, ex "csw3"
+  #   YaleLDAP.lookup(email: "casey.watts@yale.edu")
+  #   YaleLDAP.lookup(netid: "csw3")
+  #   YaleLDAP.lookup(upi: "12714662")
   #
-  # @return
-  #   Standard hash (see extract_attributes)
-  # 
-  # @example
-  #   YaleLDAP.lookup_by_netid("csw3")
-  #
-  def self.lookup_by_netid(netid)
-    ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
-    upifilter = Net::LDAP::Filter.eq('uid', netid)
-    ldap_response = ldap.search(base: LDAP_BASE,
-                     filter: upifilter,
-                     attributes: LDAP_ATTRS)
-    extract_attributes(ldap_response)
-  end
-
-  ##
-  # Lookup LDAP information by Yale email address
-  # 
-  # @param
-  #   email as a string, ex "casey.watts@yale.edu"
-  #
-  # @return
-  #   Standard hash (see extract_attributes)
-  # 
-  # @example
-  #   YaleLDAP.lookup_by_email("casey.watts@yale.edu")
-  #
-  def self.lookup_by_email(email)
-    ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
-    upifilter = Net::LDAP::Filter.eq('mail', email)
-    ldap_response = ldap.search(base: LDAP_BASE,
-                     filter: upifilter,
-                     attributes: LDAP_ATTRS)
-    extract_attributes(ldap_response)
+  def self.lookup(input_hash)
+    lookup_filter = construct_filter(input_hash)
+    ldap_response = execute_query(lookup_filter)
+    attributes = extract_attributes(ldap_response)
+    return attributes
   end
 
 private
-  #
-  # Input a raw LDAP response
-  #
-  # Output is a hash with keys: first_name, last_name, upi, netid, email, collegename, college, class_year
-  #
-  def self.extract_attributes(ldap_response)
-    # everyone has these
-    first_name = ldap_response[0][:givenname][0]
-    last_name = ldap_response[0][:sn][0]
-    upi = ldap_response[0][:UPI][0]
 
-    # not everyone has these
-    netid = ldap_response[0][:uid][0] || ""
-    email = ldap_response[0][:mail][0] || ""
-    collegename = ldap_response[0][:collegename][0] || ""
-    college = ldap_response[0][:college][0] || ""
-    class_year = ldap_response[0][:class][0] || ""
+  ###
+  # Nickname Logic
+  ###
 
+  def self.convert_from_nickname(attribute)
+    attribute = attribute.to_s
+    nicknames[attribute]
+  end
+
+  def self.convert_to_nickname(attribute)
+    attribute = attribute.to_s
+    nicknames.invert[attribute]
+  end
+
+  def self.search_attributes
+    nicknames.values
+  end
+
+  def self.nicknames
+    # a list of attributes we care about
+    # "nickname" => "ldapname"
+    # "somethingthatmakessense" => "somethingjargony"
     return {
-      first_name: first_name,
-      last_name: last_name,
-      yale_upi: upi,
-      netid: netid,
-      email: email,
-      collegename: collegename,
-      college: college,
-      class_year: class_year
+      "first_name" => "givenname",
+      "nickname" => "eduPersonNickname",
+      "last_name" => "sn",
+      "upi" => "UPI",
+      "netid" => "uid",
+      "email" => "mail",
+      "college_name" => "collegename",
+      "college_abbreviation" => "college",
+      "class_year" => "class",
+      "school" => "organizationUnitName",
+      "telephone" => "officePhone",
+      "address" => "postalAddress"
     }
+  end
+
+
+
+  ###
+  #LDAP Search Logic
+  ###
+
+
+  # Constructs a Net::LDAP::Filter object out of our user input
+  # @param the input hash we want users to input, such as {:email => "casey.watts@yale.edu"}
+  # @return a net-ldap Net::LDAP::Filter object with our desired query
+  def self.construct_filter(input_hash)
+    query_type_nickname = input_hash.keys.first
+    query_value = input_hash.values.first
+    query_type_ldapname = convert_from_nickname(query_type_nickname)
+    lookup_filter = Net::LDAP::Filter.eq(query_type_ldapname, query_value)
+    return lookup_filter
+  end
+
+  # Executes the query on the LDAP server.
+  # @param a net-ldap Net::LDAP::Filter object with our desired query
+  # @return the raw net-ldap LDAP response object
+  def self.execute_query(lookup_filter)
+    ldap = Net::LDAP.new host: LDAP_HOST, port: LDAP_PORT
+    ldap_response = ldap.search(base: LDAP_BASE,
+                     filter: lookup_filter,
+                     attributes: search_attributes)
+    return ldap_response
+  end
+
+
+  def self.extract_attributes(ldap_response)
+    attributes = {}
+    nicknames.each do |nickname, ldapname|
+      attribute = extract_attribute(ldap_response, ldapname)
+      attribute = attribute.gsub(/\$/,"\n") #for address
+      attributes[nickname.to_sym] = attribute
+    end
+    return attributes
+  end
+
+  def self.extract_attribute(ldap_response, attribute_name)
+    attribute = ldap_response[0][attribute_name][0]
+    attribute ||= ""
   end
 
 end
