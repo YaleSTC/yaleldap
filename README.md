@@ -30,20 +30,20 @@ Or install it yourself as:
 
 ###UPI
 ```
-YaleLDAP.lookup_by_upi("12714662")
-=> {:first_name=>"Casey", :last_name=>"Watts", :yale_upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :collegename=>"", :college=>"", :class_year=>""}
+YaleLDAP.lookup(upi: "12714662")
+=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :school=>"", :telephone=>"", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
 ```
 
 ###NetID
 ```
-YaleLDAP.lookup_by_netid("csw3")
-=> {:first_name=>"Casey", :last_name=>"Watts", :yale_upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :collegename=>"", :college=>"", :class_year=>""}
+YaleLDAP.lookup(netid: "csw3")
+=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :school=>"", :telephone=>"", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
 ```
 
 ###Email
 ```
-YaleLDAP.lookup_by_email("casey.watts@yale.edu")
-=> {:first_name=>"Casey", :last_name=>"Watts", :yale_upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :collegename=>"", :college=>"", :class_year=>""}
+YaleLDAP.lookup(email: "casey.watts@yale.edu")
+=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :school=>"", :telephone=>"", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
 ```
 
 
