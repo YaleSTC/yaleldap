@@ -66,7 +66,7 @@ private
       "college_name" => "collegename",
       "college_abbreviation" => "college",
       "class_year" => "class",
-      "school" => "organizationUnitName",
+      "school" => "organizationName",
       "telephone" => "telephoneNumber",
       "address" => "postalAddress"
     }
