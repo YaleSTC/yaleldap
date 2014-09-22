@@ -83,8 +83,8 @@ private
   # @param the input hash we want users to input, such as {:email => "casey.watts@yale.edu"}
   # @return a net-ldap Net::LDAP::Filter object with our desired query
   def self.construct_filter(input_hash)
-    query_type_nickname = input_hash.keys.first
-    query_value = input_hash.values.first
+    query_type_nickname = input_hash.keys.first.to_s
+    query_value = input_hash.values.first.to_s
     query_type_ldapname = convert_from_nickname(query_type_nickname)
     lookup_filter = Net::LDAP::Filter.eq(query_type_ldapname, query_value)
     return lookup_filter
