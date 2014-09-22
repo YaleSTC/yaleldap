@@ -58,3 +58,10 @@ For more background on how the `net-ldap` gem works with specific Yale examples,
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+### Development
+1. You can load the file you're working on by opening irb and running `load "./lib/yaleldap.rb"` (from the directory this repo is in).
+2. You can run our testing suite by running `bundle exec guard`, which uses guard-rspec to run our testing suite.
+3. We use YARD for in-line documentation , to view the documentation locally run `yard` then open `docs/index.html` to view them.
+4. Our testing suite is automatically run on Travis CI.
+
