@@ -63,10 +63,10 @@ private
       "upi" => "UPI",
       "netid" => "uid",
       "email" => "mail",
+      "school" => "curriculumshortname",
       "college_name" => "collegename",
       "college_abbreviation" => "college",
       "class_year" => "class",
-      "school" => "organizationName",
       "telephone" => "telephoneNumber",
       "address" => "postalAddress"
     }
