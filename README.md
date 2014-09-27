@@ -30,19 +30,19 @@ Or install it yourself as:
 ###UPI
 ```
 YaleLDAP.lookup(upi: "12714662")
-=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :school=>"", :telephone=>"", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
+=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :title=>"Assistant Manager", :division=>"Information Technology Services", :school=>"Information Technology Services", :school_abbreviation=>"", :organization=>"ITSCCT Web Technologies", :major=>"", :curriculum=>"", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :telephone=>"203-436-5986", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
 ```
 
 ###NetID
 ```
 YaleLDAP.lookup(netid: "csw3")
-=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :school=>"", :telephone=>"", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
+=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :title=>"Assistant Manager", :division=>"Information Technology Services", :school=>"Information Technology Services", :school_abbreviation=>"", :organization=>"ITSCCT Web Technologies", :major=>"", :curriculum=>"", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :telephone=>"203-436-5986", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
 ```
 
 ###Email
 ```
 YaleLDAP.lookup(email: "casey.watts@yale.edu")
-=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :school=>"", :telephone=>"", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
+=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :title=>"Assistant Manager", :division=>"Information Technology Services", :school=>"Information Technology Services", :school_abbreviation=>"", :organization=>"ITSCCT Web Technologies", :major=>"", :curriculum=>"", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :telephone=>"203-436-5986", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
 ```
 
 ## Return Data
