@@ -97,7 +97,7 @@ Curriculum/Major [listed as curriculum, major] - more specific, students tend to
 
 
 ## Use in Rails
-You can use an "after_create" filter to have these attributes filled out after the user is created (maybe after first login if that's how your app works). `.slice(:first_name, :last_name, :netid)` will extract only the attributes you want to save to ActiveRecord. If your database uses diferent names you will have to rename the appropriate attributes manually, or just extract what you want.
+You can use an "after_create" filter to have these attributes filled out after the user is created (maybe after first login if that's how your app works). `.slice(:first_name, :last_name, :netid)` will extract only the attributes you want to save to ActiveRecord. If your database uses diferent names you will have to rename the appropriate attributes manually using your own ruby code.
 ```
 class User < ActiveRecord::Base
   after_create :get_ldap_attributes
