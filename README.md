@@ -45,6 +45,51 @@ YaleLDAP.lookup(email: "casey.watts@yale.edu")
 => {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :school=>"", :telephone=>"", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
 ```
 
+## Return Data
+- Yale's list of LDAP attributes are listed by their LDAP names [here](http://directory.yale.edu/phonebook/help.htm).
+- Our set of nicknames for Yale's attributes are in `lib/yaleldap.rb`
+- If you think there is a commonly used field we missed, file a github issue! :D
+- If you'd like more control over your YaleLDAP connection, you could do this all manually. [Here is a gist](https://gist.github.com/caseywatts/ddea3996853050d1e5ad) of how to use the 'net-ldap' gem to access Yale's LDAP.
+- Here are some examples of what the more vague LDAP terms contain:
+```
+Division (general, most people have this)
+  Yale College
+  Graduate School of Arts & Sci
+  Architecture School
+  Pharmacology
+  MYSM School Of Medicine
+  Information Technology Services
+
+Organization (more specific, staff tend to have these)
+  MPHARM Administration
+  ITSCCT Web Technologies
+
+Curriculum/Major (more specific, students tend to have these)
+  Pharmacology
+  Architecture School
+  Physics
+
+Curriculum Code (seems to be abbreviation of division if they are a school?)
+  YC
+  GS
+  AC
+```
+
+## Use in Rails
+You can use an "after_create" filter to have these attributes filled out after the user is created (maybe after first login if that's how your app works). `.slice(:first_name, :last_name, :netid)` will extract only the attributes you want to save to ActiveRecord. If your database uses diferent names you will have to rename the appropriate attributes manually, or just extract what you want.
+```
+class User < ActiveRecord::Base
+  after_create :get_ldap_attributes
+
+  def get_ldap_attributes
+    attributes = YaleLDAP.lookup(netid: netid)
+      .slice(:first_name, :last_name, :netid)
+    self.update_attributes(attributes)
+  rescue
+    false # don't actually save it if LDAP lookup fails
+  end
+end
+```
 
 ## Documentation
 The source code is documented thoroughly, view it on [rdoc.info](http://rdoc.info/github/YaleSTC/yaleldap/master/frames)
