@@ -58,7 +58,7 @@ YaleLDAP.lookup(upi: "12714662")
 
 ## Return Data
 ###What data is returned?
->What data is returned?
+>"What does the returned data look like? Where does it come from?"
 
 We map a memorable nickname to each of the less memorable formal LDAP names.
 - The easiest way to see what attributes are available is to test it out.
@@ -89,8 +89,8 @@ Curriculum/Major [listed as curriculum, major] - more specific, students tend to
   Physics
 ```
 
-### I want more data
->I want some data that's in the [Yale Phonebook](http://directory.yale.edu/phonebook/index.htm) but it's not in the `YaleLDAP` gem.
+### Something's Missing?
+>"I want some data that's in the [Yale Phonebook](http://directory.yale.edu/phonebook/index.htm) but it's not in the `YaleLDAP` gem."
 
 - If you think there is a commonly used field we missed, file a github issue! :D
 - If you'd like more control over your YaleLDAP connection, you could do this all manually. [Here is a gist](https://gist.github.com/caseywatts/ddea3996853050d1e5ad) of how to use the 'net-ldap' gem to access Yale's LDAP.
