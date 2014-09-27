@@ -25,13 +25,17 @@ Or install it yourself as:
 
     $ gem install yaleldap
 
-## Usage
+To play with it, open `irb` and try these:
 
-###UPI
 ```
-YaleLDAP.lookup(upi: "12714662")
-=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :title=>"Assistant Manager", :division=>"Information Technology Services", :school=>"Information Technology Services", :school_abbreviation=>"", :organization=>"ITSCCT Web Technologies", :major=>"", :curriculum=>"", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :telephone=>"203-436-5986", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
+require 'yaleldap'
+attributes = YaleLDAP.lookup(netid: "csw3")
+attributes = YaleLDAP.lookup(email: "casey.watts@yale.edu")
+attributes = YaleLDAP.lookup(upi: "12714662")
 ```
+
+
+## Usage
 
 ###NetID
 ```
@@ -45,11 +49,21 @@ YaleLDAP.lookup(email: "casey.watts@yale.edu")
 => {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :title=>"Assistant Manager", :division=>"Information Technology Services", :school=>"Information Technology Services", :school_abbreviation=>"", :organization=>"ITSCCT Web Technologies", :major=>"", :curriculum=>"", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :telephone=>"203-436-5986", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
 ```
 
+###UPI
+```
+YaleLDAP.lookup(upi: "12714662")
+=> {:first_name=>"Casey", :nickname=>"", :last_name=>"Watts", :upi=>"12714662", :netid=>"csw3", :email=>"casey.watts@yale.edu", :title=>"Assistant Manager", :division=>"Information Technology Services", :school=>"Information Technology Services", :school_abbreviation=>"", :organization=>"ITSCCT Web Technologies", :major=>"", :curriculum=>"", :college_name=>"", :college_abbreviation=>"", :class_year=>"", :telephone=>"203-436-5986", :address=>"ITS Student Technology Collaborative\nPO BOX 208300\nNew Haven, CT 06520-8300"}
+```
+
+
 ## Return Data
-- Yale's list of LDAP attributes are listed by their LDAP names [here](http://directory.yale.edu/phonebook/help.htm).
-- Our set of nicknames for Yale's attributes are in `lib/yaleldap.rb`
-- If you think there is a commonly used field we missed, file a github issue! :D
-- If you'd like more control over your YaleLDAP connection, you could do this all manually. [Here is a gist](https://gist.github.com/caseywatts/ddea3996853050d1e5ad) of how to use the 'net-ldap' gem to access Yale's LDAP.
+###What data is returned?
+>What data is returned?
+
+We map a memorable nickname to each of the less memorable formal LDAP names.
+- The easiest way to see what attributes are available is to test it out.
+- Our full list of nicknames is in `lib/yaleldap.rb` under `self.nicknames`
+- Yale's list of formal LDAP attribute names are listed [here](http://directory.yale.edu/phonebook/help.htm).
 - Here are some examples of what the more vague LDAP terms contain. We've included multiple aliases for some of these.
 ```
 Division [listed as division, school] - general category, most people have this. For students, this is their school)
@@ -74,6 +88,13 @@ Curriculum/Major [listed as curriculum, major] - more specific, students tend to
   Architecture School
   Physics
 ```
+
+### I want more data
+>I want some data that's in the [Yale Phonebook](http://directory.yale.edu/phonebook/index.htm) but it's not in the `YaleLDAP` gem.
+
+- If you think there is a commonly used field we missed, file a github issue! :D
+- If you'd like more control over your YaleLDAP connection, you could do this all manually. [Here is a gist](https://gist.github.com/caseywatts/ddea3996853050d1e5ad) of how to use the 'net-ldap' gem to access Yale's LDAP.
+
 
 ## Use in Rails
 You can use an "after_create" filter to have these attributes filled out after the user is created (maybe after first login if that's how your app works). `.slice(:first_name, :last_name, :netid)` will extract only the attributes you want to save to ActiveRecord. If your database uses diferent names you will have to rename the appropriate attributes manually, or just extract what you want.
