@@ -50,9 +50,9 @@ YaleLDAP.lookup(email: "casey.watts@yale.edu")
 - Our set of nicknames for Yale's attributes are in `lib/yaleldap.rb`
 - If you think there is a commonly used field we missed, file a github issue! :D
 - If you'd like more control over your YaleLDAP connection, you could do this all manually. [Here is a gist](https://gist.github.com/caseywatts/ddea3996853050d1e5ad) of how to use the 'net-ldap' gem to access Yale's LDAP.
-- Here are some examples of what the more vague LDAP terms contain:
+- Here are some examples of what the more vague LDAP terms contain. We've included multiple aliases for some of these.
 ```
-Division (general, most people have this)
+Division [listed as division, school] - general category, most people have this. For students, this is their school)
   Yale College
   Graduate School of Arts & Sci
   Architecture School
@@ -60,19 +60,19 @@ Division (general, most people have this)
   MYSM School Of Medicine
   Information Technology Services
 
-Organization (more specific, staff tend to have these)
-  MPHARM Administration
-  ITSCCT Web Technologies
-
-Curriculum/Major (more specific, students tend to have these)
-  Pharmacology
-  Architecture School
-  Physics
-
-Curriculum Code (seems to be abbreviation of division if they are a school?)
+Curriculum Code [listed as school_abbreviation] - seems to be abbreviation of division if they are a school?)
   YC
   GS
   AC
+
+Organization [listed as organization] - more specific, staff tend to have these
+  MPHARM Administration
+  ITSCCT Web Technologies
+
+Curriculum/Major [listed as curriculum, major] - more specific, students tend to have these
+  Pharmacology
+  Architecture School
+  Physics
 ```
 
 ## Use in Rails
