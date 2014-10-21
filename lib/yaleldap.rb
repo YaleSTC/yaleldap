@@ -68,8 +68,8 @@ private
       "school" => "o",
       "school_abbreviation" => "curriculumshortname",
       "organization" => "ou",
-      "major" => "curriculum",
-      "curriculum" => "curriculum",
+      "major" => "major",
+      "curriculum" => "major",
       "college_name" => "collegename",
       "college_abbreviation" => "college",
       "class_year" => "class",
@@ -110,6 +110,7 @@ private
 
   def self.extract_attributes(ldap_response)
     attributes = {}
+    binding.pry
     nicknames.each do |nickname, ldapname|
       attribute = extract_attribute(ldap_response, ldapname)
       attribute = attribute.gsub(/\$/,"\n") #for address
