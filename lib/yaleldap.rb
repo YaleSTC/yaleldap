@@ -110,7 +110,6 @@ private
 
   def self.extract_attributes(ldap_response)
     attributes = {}
-    binding.pry
     nicknames.each do |nickname, ldapname|
       attribute = extract_attribute(ldap_response, ldapname)
       attribute = attribute.gsub(/\$/,"\n") #for address
